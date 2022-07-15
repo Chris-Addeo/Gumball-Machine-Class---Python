@@ -1,0 +1,80 @@
+# create the class
+class Gumball_Machine:
+    
+    def __init__(self,capacity):
+        # create base variabes
+        self.capacity = capacity
+        self.money = 0.00
+        
+        # create colors
+        import random
+        self.types = []
+        for i in range(capacity):
+            rand = random.randint(0,3)
+            if rand == 0:
+                self.types.append("blue")
+            elif rand == 1:
+                self.types.append("red")
+            else:
+                self.types.append("green")
+        
+        # print the capacity
+        print("Gumball Machine created with", self.capacity, "random gumballs.")
+    
+    
+    def report(self):
+        self.lim = len(self.types)
+        print("Gumball Machine Report:")
+        print("* Gumballs in machine:", self.lim)
+        print("* Money in machine: $", format(self.money, '.2f'), sep='')
+    
+    
+    def dispense(self,coin):
+        self.lim = len(self.types)
+        if self.lim > 0:
+            
+            # randomly pick color/type, dispense it, delete it from list ... add money
+            if coin == .25:
+                
+                # type
+                import random
+                if self.lim > 1:
+                    rand = random.randint(0,self.lim-1)
+                else:
+                    rand = 0
+                color = self.types[rand]
+                print("Accepting 0.25; Dispensing a", color, "gumball")
+                del self.types[rand]
+                
+                # money
+                self.money += .25
+            
+            # if invalid price
+            else:
+                print("Invalid coin, no gumball will be dispensed.")
+        
+        # if no more gumballs left
+        else:
+            print("Machine is empty, no gumball will be dispensed.")
+    
+    
+    def count_gumballs_by_type(self, types):
+        if types == "red":
+            counter = 0
+            for g in self.types:
+                if "red" == g:
+                    counter += 1
+            print("There are", counter, "gumballs of type red in the machine.")
+        elif types == "green":
+            counter = 0
+            for g in self.types:
+                if "green" == g:
+                    counter += 1
+            print("There are", counter, "gumballs of type green in the machine.")
+        else:
+            counter = 0
+            for g in self.types:
+                if "blue" == g:
+                    counter += 1
+            print("There are", counter, "gumballs of type blue in the machine.")
+
